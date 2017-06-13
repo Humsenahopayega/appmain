@@ -1,16 +1,20 @@
+import os
+from datetime import timedelta
+import datetime
+import pytz
 import httplib2
 from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
-service_account_email = 'XXX@YYY.iam.gserviceaccount.com'
+service_account_email = 'new-383@lucid-formula-170000.iam.gserviceaccount.com'
 
-CLIENT_SECRET_FILE = 'creds.p12'
+CLIENT_SECRET_FILE = 'client_secrets.json'
 
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 scopes = [SCOPES]
 
 def build_service():
-    credentials = ServiceAccountCredentials.from_p12_keyfile(
+    credentials = ServiceAccountCredentials.from_json_keyfile(
         service_account_email=service_account_email,
         filename=CLIENT_SECRET_FILE,
         scopes=SCOPES
@@ -27,7 +31,7 @@ def create_event():
     service = build_service()
 
     start_datetime = datetime.datetime.now(tz=pytz.utc)
-    event = service.events().insert(calendarId='<YOUR EMAIL HERE>@gmail.com', body={
+    event = service.events().insert(calendarId='<suyashgarg2>@gmail.com', body={
         'summary': 'Foo',
         'description': 'Bar',
         'start': {'dateTime': start_datetime.isoformat()},
