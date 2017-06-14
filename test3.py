@@ -1,17 +1,17 @@
 from __future__ import print_function
+from django.core import serializers
 import httplib2
 import os
-
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
-
+from app.models import Appreq
 import datetime
 
 try:
     import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+    flags = tools.argparser.parse_args([])
 except ImportError:
     flags = None
 
@@ -46,13 +46,13 @@ def main() :
         credentials = get_credentials()
         http = credentials.authorize(httplib2.Http())
         CAL = discovery.build('calendar' , 'v3' , http=http)
-        GMT_OFF='+5:30'
+        summary = serializers.serialize('json' ,Appreq.objects.filter( title='Dinner').values('title'))
         EVENT = {
-                'summary' : 'New Appointment' ,
-                'start' : { 'dateTime' : '2017-06-13T15:00:00+5:30'},
-                'end' : { 'dateTime' : '2017-06-13T17:00:00+5:30'}
+                'summary' : summary['title'] ,
+                'start' : { 'dateTime' : '2017-06-08T15:00:00+05:30'},
+                'end' : { 'dateTime' : '2017-06-08T17:00:00+05:30'}
                 }
         event = CAL.events().insert(calendarId='primary', body=EVENT).execute()
         print ('Event created: %s' % (event.get('htmlLink')))
-if __name__ == '__main__':
-          main()
+if __name__ == '__main__' :
+        main()
