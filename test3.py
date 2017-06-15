@@ -1,5 +1,4 @@
 from __future__ import print_function
-from django.core import serializers
 import httplib2
 import os
 from apiclient import discovery
@@ -45,14 +44,15 @@ def get_credentials():
 def main() :
         credentials = get_credentials()
         http = credentials.authorize(httplib2.Http())
-        CAL = discovery.build('calendar' , 'v3' , http=http)
-        summary = serializers.serialize('json' ,Appreq.objects.filter( title='Dinner').values('title'))
+        service = discovery.build('calendar' , 'v3' , http=http)
+        summary = Appreq.objects.filter( title='Dinner').values('title')
         EVENT = {
-                'summary' : summary['title'] ,
-                'start' : { 'dateTime' : '2017-06-08T15:00:00+05:30'},
-                'end' : { 'dateTime' : '2017-06-08T17:00:00+05:30'}
-                }
-        event = CAL.events().insert(calendarId='primary', body=EVENT).execute()
+		'summary': summary,
+                'description': 'A chance to hear more about Google\'s developer products.',
+                'start': {'dateTime': '2017-06-15T09:00:00+05:30'},
+                'end': {'dateTime': '2017-06-15T17:00:00+05:30'}
+		}
+        event = service.events().insert(body=EVENT,calendarId='primary',sendNotifications=True).execute()
         print ('Event created: %s' % (event.get('htmlLink')))
 if __name__ == '__main__' :
         main()

@@ -5,14 +5,14 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="{% static 'css/app.css' %}">
-<title>Request Appointment</title>
+<title>Registration Form</title>
 </head>
 <body>
 <div class="post">
- <h1>New Request</h1>
+ <h1 style= margin-left:3%;>Enter the required details</h1>
     <form method='POST' class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="savebutton">Submit Request</button>
+        {{ regform.as_p }}
+        <button style= width:200px; type="submit" class="savebutton">Register</button>
     </form>
 </body>
 </div>
