@@ -5,10 +5,15 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="{% static 'css/app.css' %}">
+<div class="post">
 <title>Registration Form</title>
+<style type="text/css">
+.post{
+margin-top:15%;
+}
+</style>
 </head>
 <body>
-<div class="post">
  <h1 style= margin-left:3%;>Enter the required details</h1>
     <form method='POST' class="post-form">{% csrf_token %}
         {{ regform.as_p }}
