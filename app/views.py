@@ -72,7 +72,7 @@ def calendar(request, year, month, series_id=None):
 		my_next_month = 1
 	my_year_after_this = my_year + 1
 	my_year_before_this = my_year - 1
-	return render_to_response("cal_template.html", { 'readings_list': my_reading_events,
+	return render_to_response("template.html", { 'readings_list': my_reading_events,
 														'month': my_month,
 														'month_name': named_month(my_month),
 														'year': my_year,
