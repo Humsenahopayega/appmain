@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import subprocess
 from calendar import monthrange
 from datetime import datetime
+
 @csrf_exempt
 def appreq(request):
     if request.method == 'POST':
@@ -16,8 +17,6 @@ def appreq(request):
        if form.is_valid():
             appreq = form.save()
             appreq.save()
-            test3.get_credentials()
-            test3.main()
     form = PostForm()
     return render_to_response( 'app/appreq.html', {'form':form}, RequestContext(request))
 @csrf_exempt
@@ -35,7 +34,7 @@ def named_month(month_number):
 	"""
 	Return the name of the month, given the number.
 	"""
-	return datetime(1900, month_number, 1).strftime("%B")
+	return date(1900, month_number, 1).strftime("%B")
 
 def this_month(request):
 	"""
