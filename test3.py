@@ -46,13 +46,15 @@ def main() :
         credentials = get_credentials()
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
-        summary = Appreq.objects.filter( title='Dinner').values('title')
-        EVENT = {
-		        'summary': summary["title"],
-                'description': 'A chance to hear more about Google\'s developer products.',
-                'start': {'dateTime': '2017-06-15T09:00:00+05:30'},
-                'end': {'dateTime': '2017-06-15T17:00:00+05:30'},
-		}
+        event = Appreq.objects.filter( title='Dinner').values('title')
+        EVENT=[]
+        for evnt in EVENT:
+         EVENT= {
+         'summary' : event.title,
+         'description': event.purpose,
+         'start': {'dateTime': event.start_date},
+         'end': {'dateTime': event.end_date},
+         }
         event = service.events().insert(body=EVENT,calendarId='primary',sendNotifications=True).execute()
         print ('Event created: %s' % (event.get('htmlLink')))
 if __name__ == '__main__' :

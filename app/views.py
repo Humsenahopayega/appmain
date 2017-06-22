@@ -17,6 +17,8 @@ def appreq(request):
        if form.is_valid():
             appreq = form.save()
             appreq.save()
+            test3.get_credentials()
+            test3.main()
     form = PostForm()
     return render_to_response( 'app/appreq.html', {'form':form}, RequestContext(request))
 @csrf_exempt
