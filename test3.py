@@ -9,6 +9,9 @@ from oauth2client.file import Storage
 from app.models import Appreq
 import datetime
 import json
+
+import dateutil.parser as parser
+
 try:
     import argparse
     flags = tools.argparser.parse_args([])
@@ -40,22 +43,33 @@ def get_credentials():
             credentials = tools.run(flow, store)
             print('Storing credentials to ' + credential_path)
     return credentials
-
-
 def main() :
         credentials = get_credentials()
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
-        evnt = Appreq.objects.filter( title='Dinner').values('title')
+        evnt = Appreq.objects.filter( title='Dinner').values_list('title')
+        title = evnt[0]
+        evnt = Appreq.objects.filter( title='Dinner').values_list('purpose')
+        description = evnt[0]
+        evnt = Appreq.objects.filter( title='Dinner').values_list('start_date')
+        start=evnt[0]
+        text = '%s' %start
+        start = (parser.parse(text))
+        start = start.isoformat()
+        evnt = Appreq.objects.filter( title='Dinner').values_list('end_date')
+        end=evnt[0]
+        text = '%s' %end
+        end = (parser.parse(text))
+        end = end.isoformat()
         EVENT= {
-                'summary' : '%s' %evnt,
-                'description': 'purpose',
+                'summary' : '%s' %title,
+                'description': '%s' %description,
                 'start': {
-                          'dateTime': '2017-06-26T09:00:00+05:30',
+                          'dateTime': '%s' %start,
                           'timezone': 'Asia/Kolkata',
                           },
                 'end':   {
-                          'dateTime': '2017-06-26T09:00:00+05:30',
+                          'dateTime': '%s' %end,
                           'timezone': 'Asia/Kolkata',
                           }
          }
