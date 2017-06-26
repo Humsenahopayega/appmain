@@ -9,16 +9,20 @@ from django.views.decorators.csrf import csrf_exempt
 import subprocess
 from calendar import monthrange
 from datetime import datetime
+from django.shortcuts import redirect
+
 
 @csrf_exempt
 def appreq(request):
     if request.method == 'POST':
        form = PostForm(request.POST)
        if form.is_valid():
-            appreq = form.save()
+            appreq = form.save(commit=False)
+            appreq.id=''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
             appreq.save()
             test3.get_credentials()
             test3.main()
+            return redirect('redirect')
     form = PostForm()
     return render_to_response( 'app/appreq.html', {'form':form}, RequestContext(request))
 @csrf_exempt
@@ -30,6 +34,9 @@ def users(request):
           reg.save()
     form = RegForm()
     return render_to_response( 'app/register.html', {'regform':form}, RequestContext(request))
+
+def redirect(request):
+    return render_to_response('app/redirect.html', {'redirect':redirect}, RequestContext(request))
 
 def named_month(month_number):
 
