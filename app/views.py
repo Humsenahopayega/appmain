@@ -10,6 +10,8 @@ import subprocess
 from calendar import monthrange
 from datetime import datetime
 from django.shortcuts import redirect
+import string
+import random
 
 
 @csrf_exempt
@@ -17,8 +19,7 @@ def appreq(request):
     if request.method == 'POST':
        form = PostForm(request.POST)
        if form.is_valid():
-            appreq = form.save(commit=False)
-            appreq.ID=''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+            appreq = form.save()
             appreq.save()
             test3.get_credentials()
             test3.main()

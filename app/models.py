@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+import uuid
 from django.utils.html import conditional_escape as esc
 from django.utils.safestring import mark_safe
 from itertools import groupby
@@ -16,7 +16,7 @@ class User(models.Model):
         return self.name
 class Appreq(models.Model):
     ename = models.ForeignKey(User, on_delete=models.CASCADE)
-    ID = models.CharField(max_length=5, primary_key=True, unique=True)
+    ID = models.CharField(max_length=100,primary_key=True, unique=True, default=uuid.uuid4())
     mail = models.EmailField()
     cname = models.CharField(max_length=50)
     phone = models.BigIntegerField()
@@ -26,6 +26,8 @@ class Appreq(models.Model):
         default=timezone.now)
     end_date = models.DateTimeField(
         default=timezone.now)
+    def __unicode__(self):
+        return self.ename
     def submit(self):
         self.save()
     def __str__(self):
