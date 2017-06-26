@@ -44,20 +44,14 @@ INSTALLED_APPS = [
     'djangobower',
     'bootstrap3',
 ]
-STATICFILES_FINDERS = (
+STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
-)
+]
 
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
-
-BOWER_INSTALLED_APPS = (
-    'jquery',
-    'jquery-ui',
-    'bootstrap'
-)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
