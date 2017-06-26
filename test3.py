@@ -1,6 +1,7 @@
 from __future__ import print_function
 import httplib2
 import os
+
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
@@ -8,7 +9,6 @@ from oauth2client.file import Storage
 from app.models import Appreq
 import datetime
 import json
-
 try:
     import argparse
     flags = tools.argparser.parse_args([])
@@ -47,9 +47,7 @@ def main() :
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
         evnt = Appreq.objects.filter( title='Dinner').values('title')
-        EVENT=[]
-        for evnt in EVENT:
-         EVENT= {
+        EVENT= {
                 'summary' : '%s' %evnt,
                 'description': 'purpose',
                 'start': {
