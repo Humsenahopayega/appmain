@@ -18,7 +18,7 @@ def appreq(request):
        form = PostForm(request.POST)
        if form.is_valid():
             appreq = form.save(commit=False)
-            appreq.id=''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+            appreq.ID=''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
             appreq.save()
             test3.get_credentials()
             test3.main()
