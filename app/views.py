@@ -42,3 +42,6 @@ def home(request):
 
 def pagemain(request):
     return render_to_response('app/main.html', {}, RequestContext(request))
+
+def list(request):
+    return render_to_response('app/list.html', {}, RequestContext(request))
