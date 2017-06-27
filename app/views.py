@@ -38,8 +38,4 @@ def redirect(request):
     return render_to_response('app/redirect.html', {'redirect':redirect}, RequestContext(request))
 
 def home(request):
-   context = RequestContext(request,
-                           {'request': request,
-                            'user': request.user})
-   return render_to_response('app/home.html',
-                             context_instance=context)
+   return render_to_response('app/home.html', {'home':home}, RequestContext(request))

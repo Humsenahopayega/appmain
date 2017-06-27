@@ -1,5 +1,5 @@
 {% extends 'app/base.html' %}
-
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 {% block main %}
  <div>
  <h1>Third-party authentication demo</h1>
@@ -9,9 +9,6 @@
    {% if user and not user.is_anonymous %}
      <li>
        <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-     </li>
-     <li>
-       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
      </li>
    {% else %}
      <li>

@@ -86,15 +86,13 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-     'social_core.backends.github.GithubOAuth2',
-     'social_core.backends.twitter.TwitterOAuth',
-     'social_core.backends.facebook.FacebookOAuth2',
+     'social_core.backends.google.GoogleOAuth2',
      'django.contrib.auth.backends.ModelBackend',
 ]
 LOGIN_REDIRECT_URL = '/'
 
-GOOGLE_OAUTH2_CLIENT_ID = os.environ.get('591011581878-pnc733vrs225lp9eoeljogdiu3311p7g.apps.googleusercontent.com')
-GOOGLE_OAUTH2_CLIENT_SECRET = os.environ.get('AZyZslMOUUjQK_Pee57COWdl')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY  = '591011581878-unff67dtltp7gernbpturm92ng1q53e8'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'e4ROi1fuETA9RDOm1QMzqrqc'
 GOOGLE_WHITE_LISTED_DOMAINS = ['heromotocorp.com']
 SOCIAL_AUTH_USER_MODEL = 'auth.User'
 
