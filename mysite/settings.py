@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'schedule',
     'djangobower',
     'bootstrap3',
+    'social_django',
 ]
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -76,10 +78,25 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+     'social_core.backends.github.GithubOAuth2',
+     'social_core.backends.twitter.TwitterOAuth',
+     'social_core.backends.facebook.FacebookOAuth2',
+     'django.contrib.auth.backends.ModelBackend',
+]
+LOGIN_REDIRECT_URL = '/'
+
+GOOGLE_OAUTH2_CLIENT_ID = os.environ.get('591011581878-pnc733vrs225lp9eoeljogdiu3311p7g.apps.googleusercontent.com')
+GOOGLE_OAUTH2_CLIENT_SECRET = os.environ.get('AZyZslMOUUjQK_Pee57COWdl')
+GOOGLE_WHITE_LISTED_DOMAINS = ['heromotocorp.com']
+SOCIAL_AUTH_USER_MODEL = 'auth.User'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
