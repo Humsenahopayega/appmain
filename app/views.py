@@ -18,7 +18,8 @@ def appreq(request):
     if request.method == 'POST':
        form = PostForm(request.POST)
        if form.is_valid():
-            appreq = form.save()
+            appreq = form.save(commit=False)
+            appreq.published_date = timezone.now()
             appreq.save()
             create.main()
             return redirect('redirect')
@@ -51,11 +52,13 @@ def list(request):
     dmail=User.objects.filter(mail = '%s' %mail)
     print('%s' %dname)
     if dname==name and dmail==mail:
-       events=Appreq.objects.all()
-       print('%s' %events)
+     denied = Appreq.objects.filter(value='-1').order_by('published_date')
+     tentative = Appreq.objects.filter(value='0').order_by('published_date')
+     confirmed = Appreq.objects.filter(value='1').order_by('published_date')
+     print('%s' %events)
     else:
-       print('No database match')
-    return render_to_response('app/list.html', {'request': request, 'user': request.user}, RequestContext(request))
+     print('No database match')
+    return render_to_response('app/list.html', {'request': request, 'user': request.user,'denied':denied,'tentative':tentative,'confirmed':confirmed}, RequestContext(request))
 
 def auth_logout(request):
     logout(request)
