@@ -1,4 +1,4 @@
-import test3
+import create
 from django.shortcuts import render_to_response,redirect
 from django.utils import timezone
 from .models import Appreq,User
@@ -20,7 +20,7 @@ def appreq(request):
        if form.is_valid():
             appreq = form.save()
             appreq.save()
-            test3.main()
+            create.main()
             return redirect('redirect')
     form = PostForm()
     return render_to_response( 'app/appreq.html', {'form':form}, RequestContext(request))
