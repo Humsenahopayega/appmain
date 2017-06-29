@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^login$',views.home,name='home'),
     url(r'^$',views.pagemain,name='pagemain'),
     url(r'^list$',views.list,name='list'),
-    url(r'^logout/$', views.logout, {'next_page': 'app/main.html'})
+    url(r'^logout/$', views.auth_logout,name='logout')
 ]

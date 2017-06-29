@@ -6,10 +6,10 @@
 </head>
 <body>
 <center>
-  {% if user.is_authenticated %}
-        <h1>LIST</h1>
-        <p>Hello {{ user.username }}!</p>
-        <a href="{% url logout %}">Logout</a>
+{% if user.is_authenticated %}
+<h1>LIST</h1>
+ <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+<a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
  {% else %}
  <h1>Please login first. Click on the link below.</h1>
  <a href="{% url 'home' %}">Login</a>
