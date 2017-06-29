@@ -10,8 +10,8 @@ import subprocess
 from calendar import monthrange
 from datetime import datetime
 from django.shortcuts import redirect
-
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 @csrf_exempt
 def appreq(request):
@@ -38,10 +38,17 @@ def redirect(request):
     return render_to_response('app/redirect.html', {'redirect':redirect}, RequestContext(request))
 
 def home(request):
-    return render_to_response('app/home.html', {'home':home}, RequestContext(request))
+    return render_to_response('app/home.html', {'request': request, 'user': request.user}, RequestContext(request))
 
 def pagemain(request):
     return render_to_response('app/main.html', {}, RequestContext(request))
 
+@login_required(login_url='/home.html')
 def list(request):
-    return render_to_response('app/list.html', {}, RequestContext(request))
+        return render_to_response('app/list.html', {}, RequestContext(request))
+
+def logout(request):
+    logout(request)
+    request.session.flush()
+    request.user = AnonymousUser
+    return render_to_response('app/main.html', {}, RequestContext(request))
