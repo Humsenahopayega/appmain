@@ -55,7 +55,6 @@ def list(request):
        print('%s' %events)
     else:
        print('No database match')
-
     return render_to_response('app/list.html', {'request': request, 'user': request.user}, RequestContext(request))
 
 def auth_logout(request):

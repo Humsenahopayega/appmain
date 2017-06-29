@@ -22,6 +22,7 @@ class Appreq(models.Model):
     phone = models.BigIntegerField()
     purpose = models.TextField()
     title = models.CharField(max_length=50)
+    value = models.IntegerField(default=0)
     start_date = models.DateTimeField(
         default=timezone.now)
     end_date = models.DateTimeField(
