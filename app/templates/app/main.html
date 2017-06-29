@@ -7,7 +7,7 @@
 <body>
 <center>
 <a href="{% url 'appreq' %}">Book an appointment</a>
-<a href="{% url 'home' %}">Check appointment requests(only for employees)</a>
+<a href="{% url 'social:begin' 'google-oauth2' %}?next={% url 'home' %}">Check appointment requests(only for employees)</a>
 </center>
 </body>
 </html>

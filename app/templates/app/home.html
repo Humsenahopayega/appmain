@@ -1,22 +1,21 @@
-{% extends 'app/base.html' %}
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-{% block main %}
- <div>
- <h1>Login through Google</h1>
-
- <p>
-   <ul>
-   {% if user and not user.is_anonymous %}
-     <li>
-       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-       <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
-     </li>
-   {% else %}
-     <li>
-       <a href="{% url 'social:begin' 'google-oauth2' %}?next={% url 'list' %}">Login with Google</a>
-     </li>
-   {% endif %}
-   </ul>
- </p>
- </div>
-{% endblock %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+</head>
+<body>
+<center>
+{% if user.is_authenticated %}
+<h1>LIST</h1>
+<a>Hello {{ user.get_full_name|default:user.username }}!</a>
+<a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
+{{denied}}   {{tentative}}   {{confirmed}}
+{% else %}
+<h1>Login through Google</h1>
+<h2>Please Login First!</h2>
+<a href="{% url 'main' %}">Return to main page</a>
+{% endif %}
+</center>
+</body>
+</html>

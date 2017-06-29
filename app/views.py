@@ -38,27 +38,23 @@ def users(request):
 def redirect(request):
     return render_to_response('app/redirect.html', {'redirect':redirect}, RequestContext(request))
 
-def home(request):
-    return render_to_response('app/home.html', {'request': request, 'user': request.user}, RequestContext(request))
-
 def pagemain(request):
     return render_to_response('app/main.html', {}, RequestContext(request))
 
 @login_required(login_url='/home.html')
-def list(request):
+def home(request):
     mail= request.user.email
     name= request.user.get_full_name
-    dname=User.objects.filter(name = '%s' %name)
-    dmail=User.objects.filter(mail = '%s' %mail)
+    dname=User.objects.get(name = name)
+    dmail=User.objects.get(mail = mail)
     print('%s' %dname)
     if dname==name and dmail==mail:
-     denied = Appreq.objects.filter(value='-1').order_by('published_date')
-     tentative = Appreq.objects.filter(value='0').order_by('published_date')
-     confirmed = Appreq.objects.filter(value='1').order_by('published_date')
-     print('%s' %events)
-    else:
-     print('No database match')
-    return render_to_response('app/list.html', {'request': request, 'user': request.user,'denied':denied,'tentative':tentative,'confirmed':confirmed}, RequestContext(request))
+      denied = Appreq.objects.filter(value='-1').order_by('published_date')
+      tentative = Appreq.objects.filter(value='0').order_by('published_date')
+      confirmed = Appreq.objects.filter(value='1').order_by('published_date')
+      return render_to_response('app/home.html', {'request': request, 'user': request.user,'denied':denied,'tentative':tentative,'confirmed':confirmed}, RequestContext(request))
+    print('No database match')
+    return render_to_response('app/home.html', {'request': request, 'user': request.user}, RequestContext(request))
 
 def auth_logout(request):
     logout(request)
