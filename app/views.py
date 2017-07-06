@@ -2,14 +2,13 @@ import create
 from django.shortcuts import render_to_response,redirect
 from django.utils import timezone
 from .models import Appreq,User
-from .forms import PostForm
-from .forms import RegForm
+from .forms import PostForm,RegForm
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 import subprocess
 from calendar import monthrange
 from datetime import datetime
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
@@ -42,20 +41,19 @@ def pagemain(request):
     return render_to_response('app/main.html', {}, RequestContext(request))
 
 @login_required(login_url='/home.html')
+@csrf_exempt
 def home(request):
     mail= request.user.email
     name= request.user.get_full_name
-    dname=User.objects.get(name = name)
-    dmail=User.objects.get(mail = mail)
-    print('%s' %dname)
-    if dname==name and dmail==mail:
-      denied = Appreq.objects.filter(value='-1').order_by('published_date')
-      tentative = Appreq.objects.filter(value='0').order_by('published_date')
-      confirmed = Appreq.objects.filter(value='1').order_by('published_date')
-      return render_to_response('app/home.html', {'request': request, 'user': request.user,'denied':denied,'tentative':tentative,'confirmed':confirmed}, RequestContext(request))
-    print('No database match')
-    return render_to_response('app/home.html', {'request': request, 'user': request.user}, RequestContext(request))
+    denied = Appreq.objects.filter(value='-1').order_by('published_date')
+    tentative = Appreq.objects.filter(value='0').order_by('published_date')
+    confirmed = Appreq.objects.filter(value='1').order_by('published_date')
 
+    return render_to_response('app/home.html', {'request': request,
+                                                'user': request.user,
+                                                'denied':denied,
+                                                'tentative':tentative,
+                                                'confirmed':confirmed}, RequestContext(request))
 def auth_logout(request):
     logout(request)
     request.session.flush()

@@ -1,13 +1,12 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'app/base.html' %}
+{% block content %}
 <title>Choose</title>
-</head>
-<body>
 <center>
+<div style= margin-top:20%;>
+<h1> Welcome! Would you like to book an appointment or check them? </h1>
+<br>
 <a href="{% url 'appreq' %}">Book an appointment</a>
 <a href="{% url 'social:begin' 'google-oauth2' %}?next={% url 'home' %}">Check appointment requests(only for employees)</a>
+</div>
 </center>
-</body>
-</html>
+{% endblock %}

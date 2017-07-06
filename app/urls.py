@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^redirect$', views.redirect, name='redirect'),
     url(r'^$',views.pagemain,name='pagemain'),
     url(r'^home$',views.home,name='home'),
-    url(r'^logout/$', views.auth_logout,name='logout')
+    url(r'^logout/$', views.auth_logout,name='logout'),
 ]

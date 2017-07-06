@@ -1,15 +1,13 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="{% static 'css/app.css' %}">
+{% extends 'app/base.html' %}
+{% block content %}
 <div class="post">
 <title>Request Appointment</title>
 <style type="text/css">
 .post{
 margin-top:8%;
+}
+body {
+    background: white url("Background.png");
 }
 </style>
 </head>
@@ -19,6 +17,4 @@ margin-top:8%;
         {{ form.as_p }}
         <button type="submit" class="savebutton">Submit Request</button>
     </form>
-</body>
-</div>
-</html>
+{% endblock %}

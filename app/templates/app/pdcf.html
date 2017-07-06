@@ -1,19 +1,10 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="{% static 'css/app.css' %}">
-<title>Home</title>
-</head>
-<body>
+{% extends 'app/base.html' %}
+{% block content %}
 <div class="post">
  <h1 style= margin-left:3%;>Pending Appointment Requests</h1>
     <form method='POST' class="post-form">{% csrf_token %}
         {{ regform.as_p }}
         <button style= width:200px; type="submit" class="savebutton">Register</button>
     </form>
-</body>
 </div>
-</html>
+{% endblock %}
