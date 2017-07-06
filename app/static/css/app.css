@@ -1,32 +1,29 @@
 .post{
-	font-family:georgia;
-	font-style:italic;
-	font-size:20px;
-	text-align:center;
+font-family:georgia;
+font-style:italic;
+font-size:20px;
+text-align:center;
 }
 .savebutton{
-	width:20%;
-	margin-left:3%;
-	margin-top:1%;
-	}
-	a:link, a:visited {
-	    background-color: black;
-	    color: white;
-	    padding: 14px 25px;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	}
-
-	a:hover, a:active {
-	    background-color: red;
-	  }
-body {
-    background-image: url("C:/Users/suyas/project/app/static/css/Background.png");
+width:20%;
+margin-left:3%;
+margin-top:1%;
 }
-input {
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1px solid black;
+body{
+background-image: url("Background.png");
+}
+input{
+border: 0;
+outline: 0;
+background: transparent;
+border-bottom: 1px solid black;
+}
+
+a:link, a:visited{
+background-color: black;  color: white;
+padding: 14px 25px;       text-align: center;
+text-decoration: none;    display: inline-block;
+}
+a:hover, a:active{
+background-color: red;
 }
