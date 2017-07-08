@@ -2,8 +2,8 @@
 {% block content %}
 <title>Choose</title>
 <center>
-<div style= margin-top:20%;>
-<h1> Welcome! Would you like to book an appointment or check them? </h1>
+<div style= margin-top:20%;margin-left:30%;>
+<h1 style= color:white;> Welcome! Would you like to book an appointment or check them? </h1>
 <br>
 <a href="{% url 'appreq' %}">Book an appointment</a>
 <a href="{% url 'social:begin' 'google-oauth2' %}?next={% url 'home' %}">Check appointment requests(only for employees)</a>
