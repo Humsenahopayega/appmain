@@ -16,15 +16,16 @@
 <form method='POST'>
   {% for tentative in tentative %}
  <a href>
- <input type="checkbox">{{tentative}}</a>
+ <input type="checkbox" name="tentative">{{tentative}}</a>
  <br>
  {% endfor %}
 <br>
-<button style= width:200px; type="submit" class="savebutton" name="Deny">Deny</button>
 </td>
-</form>
 </tr>
 </table>
+<button style= width:200px; type="submit" class="savebutton" name="Deny">Deny</button>
+<button style= width:200px; type="submit" class="savebutton" name="Accept">Accept</button>
+</form>
 {% else %}
 <h1>Login through Google</h1>
 <h2>Please Login First!</h2>

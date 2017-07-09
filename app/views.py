@@ -43,6 +43,10 @@ def pagemain(request):
 @login_required(login_url='/home.html')
 @csrf_exempt
 def home(request):
+    if request.method == 'POST' and 'accept' in request.POST:
+        request.POST.getlist('tentative')
+        print('tentative')
+
     mail= request.user.email
     name= request.user.get_full_name
     denied = Appreq.objects.filter(value='-1').order_by('published_date')
