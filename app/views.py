@@ -20,7 +20,6 @@ def appreq(request):
             appreq = form.save(commit=False)
             appreq.published_date = timezone.now()
             appreq.save()
-            create.main()
             return redirect('redirect')
     form = PostForm()
     return render_to_response( 'app/appreq.html', {'form':form}, RequestContext(request))
@@ -59,11 +58,15 @@ def home(request):
                                                 'tentative':tentative}, RequestContext(request))
     else:
        mail= request.user.email
-       name= request.user.get_full_name
-       tentative = Appreq.objects.filter(value='0').order_by('published_date')
-       return render_to_response('app/home.html', {'request': request,
+       name = request.user.get_full_name()
+       n= User.objects.filter(name=name)
+       m=User.objects.filter(mail=mail)
+       if n.exists() and m.exists():
+          tentative = Appreq.objects.filter(value='0',user__ename__=name).order_by('published_date')
+          return render_to_response('app/home.html', {'request': request,
                                                 'user': request.user,
                                                 'tentative':tentative}, RequestContext(request))
+       return render_to_response('app/main.html', {}, RequestContext(request))
 @csrf_exempt
 def denied(request):
     if request.method == 'POST' and 'Tentative' in request.POST:
