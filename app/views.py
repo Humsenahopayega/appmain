@@ -43,13 +43,20 @@ def pagemain(request):
 @login_required(login_url='/home.html')
 @csrf_exempt
 def home(request):
-    if request.method == 'POST' and 'accept' in request.POST:
-       confirmed=request.POST.getlist('tentative')
-       print('%s' %confirmed)
-       confirmed = Appreq.objects.filter().update(value='1')
-    elif request.method == 'POST' and 'deny' in request.POST:
-       request.POST.getlist('tentative')
-       confirmed = Appreq.objects.filter().update(value='-1')
+    if request.method == 'POST' and 'Accept' in request.POST:
+       t=request.POST.getlist('tentative')
+       accept = Appreq.objects.filter(**t).update(value='1')
+       tentative = Appreq.objects.filter(value='0').order_by('published_date')
+       return render_to_response('app/home.html', {'request': request,
+                                                'user': request.user,
+                                                'tentative':tentative}, RequestContext(request))
+    elif request.method == 'POST' and 'Deny' in request.POST:
+       t=request.POST.getlist('tentative')
+       denied = Appreq.objects.filter(**t).update(value='-1')
+       tentative = Appreq.objects.filter(value='0').order_by('published_date')
+       return render_to_response('app/home.html', {'request': request,
+                                                'user': request.user,
+                                                'tentative':tentative}, RequestContext(request))
     else:
        mail= request.user.email
        name= request.user.get_full_name
@@ -57,6 +64,52 @@ def home(request):
        return render_to_response('app/home.html', {'request': request,
                                                 'user': request.user,
                                                 'tentative':tentative}, RequestContext(request))
+@csrf_exempt
+def denied(request):
+    if request.method == 'POST' and 'Tentative' in request.POST:
+       t=request.POST.getlist('denied')
+       tentative = Appreq.objects.filter(**t).update(value='0')
+       denied = Appreq.objects.filter(value='-1').order_by('published_date')
+       return render_to_response('app/denied.html', {'request': request,
+                                                'user': request.user,
+                                                'denied':denied}, RequestContext(request))
+    elif request.method == 'POST' and 'Accept' in request.POST:
+       t=request.POST.getlist('denied')
+       accept = Appreq.objects.filter(**t).update(value='1')
+       denied = Appreq.objects.filter(value='-1').order_by('published_date')
+       return render_to_response('app/denied.html', {'request': request,
+                                                'user': request.user,
+                                                'denied':denied}, RequestContext(request))
+    else:
+       mail= request.user.email
+       name= request.user.get_full_name
+       denied = Appreq.objects.filter(value='-1').order_by('published_date')
+       return render_to_response('app/denied.html', {'request': request,
+                                                'user': request.user,
+                                                'denied':denied}, RequestContext(request))
+@csrf_exempt
+def accept(request):
+    if request.method == 'POST' and 'Deny' in request.POST:
+       t=request.POST.getlist('accept')
+       denied = Appreq.objects.filter(**t).update(value='-1')
+       accept = Appreq.objects.filter(value='1').order_by('published_date')
+       return render_to_response('app/accept.html', {'request': request,
+                                                'user': request.user,
+                                                'accept':accept}, RequestContext(request))
+    elif request.method == 'POST' and 'Tentative' in request.POST:
+       t=request.POST.getlist('accept')
+       tentative = Appreq.objects.filter(**t).update(value='0')
+       accept = Appreq.objects.filter(value='1').order_by('published_date')
+       return render_to_response('app/accept.html', {'request': request,
+                                                'user': request.user,
+                                                'accept':accept}, RequestContext(request))
+    else:
+       mail= request.user.email
+       name= request.user.get_full_name
+       accept = Appreq.objects.filter(value='1').order_by('published_date')
+       return render_to_response('app/accept.html', {'request': request,
+                                                'user': request.user,
+                                                'accept':accept}, RequestContext(request))
 def auth_logout(request):
     logout(request)
     request.session.flush()

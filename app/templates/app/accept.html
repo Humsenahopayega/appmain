@@ -9,13 +9,13 @@
 </br>
 <table>
 <tr>
-<td>Tentative</td>
+<td>Accepted</td>
 </tr>
 <tr>
 <td>
 <form method='POST'>
-  {% for tentative in tentative %}
- <input type="checkbox" name="tentative">{{tentative.title}} WITH  {{tentative.myname}} AT {{tentative.start_date}} TILL {{tentative.end_date}}
+  {% for accept in accept %}
+ <input type="checkbox" name="tentative">{{accept.title}} WITH  {{accept.myname}} AT {{accept.start_date}} TILL {{accept.end_date}}
  <br>
  {% endfor %}
 <br>
@@ -23,7 +23,7 @@
 </tr>
 </table>
 <button style= width:200px; type="submit" class="savebutton" name="Deny">Deny</button>
-<button style= width:200px; type="submit" class="savebutton" name="Accept">Accept</button>
+<button style= width:200px; type="submit" class="savebutton" name="Tentative">Tentative</button>
 </form>
 <br><br>
 <a href="{% url 'denied' %}">Denied</a>

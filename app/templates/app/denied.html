@@ -9,20 +9,20 @@
 </br>
 <table>
 <tr>
-<td>Tentative</td>
+<td>Denied</td>
 </tr>
 <tr>
 <td>
 <form method='POST'>
-  {% for tentative in tentative %}
- <input type="checkbox" name="tentative">{{tentative.title}} WITH  {{tentative.myname}} AT {{tentative.start_date}} TILL {{tentative.end_date}}
+  {% for denied in denied %}
+ <input type="checkbox" name="tentative">{{denied.title}} WITH  {{denied.myname}} AT {{denied.start_date}} TILL {{denied.end_date}}
  <br>
  {% endfor %}
 <br>
 </td>
 </tr>
 </table>
-<button style= width:200px; type="submit" class="savebutton" name="Deny">Deny</button>
+<button style= width:200px; type="submit" class="savebutton" name="Tentative">Tentative</button>
 <button style= width:200px; type="submit" class="savebutton" name="Accept">Accept</button>
 </form>
 <br><br>
