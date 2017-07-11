@@ -44,20 +44,19 @@ def pagemain(request):
 @csrf_exempt
 def home(request):
     if request.method == 'POST' and 'accept' in request.POST:
-        request.POST.getlist('tentative')
-        print('tentative')
-
-    mail= request.user.email
-    name= request.user.get_full_name
-    denied = Appreq.objects.filter(value='-1').order_by('published_date')
-    tentative = Appreq.objects.filter(value='0').order_by('published_date')
-    confirmed = Appreq.objects.filter(value='1').order_by('published_date')
-
-    return render_to_response('app/home.html', {'request': request,
+       confirmed=request.POST.getlist('tentative')
+       print('%s' %confirmed)
+       confirmed = Appreq.objects.filter().update(value='1')
+    elif request.method == 'POST' and 'deny' in request.POST:
+       request.POST.getlist('tentative')
+       confirmed = Appreq.objects.filter().update(value='-1')
+    else:
+       mail= request.user.email
+       name= request.user.get_full_name
+       tentative = Appreq.objects.filter(value='0').order_by('published_date')
+       return render_to_response('app/home.html', {'request': request,
                                                 'user': request.user,
-                                                'denied':denied,
-                                                'tentative':tentative,
-                                                'confirmed':confirmed}, RequestContext(request))
+                                                'tentative':tentative}, RequestContext(request))
 def auth_logout(request):
     logout(request)
     request.session.flush()
