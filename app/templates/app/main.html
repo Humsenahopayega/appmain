@@ -1,6 +1,25 @@
-{% extends 'app/base.html' %}
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background: white url("/static/images/background.png") no-repeat center center fixed;
+    background-size: cover;
+    color:#FFFFFF;
+}
+a:link, a:visited{
+background-color: black;  color: white;
+padding: 14px 25px;       text-align: center;
+text-decoration: none;    display: inline-block;
+}
+a:hover, a:active{
+background-color: red;
+}
+</style>
 <title>Choose</title>
+</head>
+<body>
 <center>
 <div style= margin-top:20%;margin-left:30%;>
 <h1 style= color:white;> Welcome! Would you like to book an appointment or check them? </h1>
@@ -9,4 +28,5 @@
 <a href="{% url 'social:begin' 'google-oauth2' %}?next={% url 'home' %}">Check appointment requests(only for employees)</a>
 </div>
 </center>
-{% endblock %}
+</body>
+</html>
