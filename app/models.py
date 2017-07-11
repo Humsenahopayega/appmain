@@ -4,8 +4,6 @@ import uuid
 from django.utils.html import conditional_escape as esc
 from django.utils.safestring import mark_safe
 from itertools import groupby
-from calendar import HTMLCalendar, monthrange
-
 
 class User(models.Model):
     name = models.CharField(max_length=50)

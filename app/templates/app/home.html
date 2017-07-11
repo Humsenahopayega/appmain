@@ -15,7 +15,7 @@
 <td>
 <form method='POST'>
   {% for tentative in tentative %}
- <input type="checkbox" name="tentative">{{tentative}}
+ <input type="checkbox" name="tentative">{{tentative.title}}  {{tentative.myname}}  {{tentative.start_date}}  {{tentative.end_date}}
  <br>
  {% endfor %}
 <br>
