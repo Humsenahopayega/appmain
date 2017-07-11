@@ -15,7 +15,7 @@
 <td>
 <form method='POST'>
   {% for accept in accept %}
- <input type="checkbox" name="accept">{{accept.title}} WITH  {{accept.myname}} AT {{accept.start_date}} TILL {{accept.end_date}}
+ <input type="checkbox" name="accept" value="{{ accept.ID }}">{{accept.title}} WITH  {{accept.myname}} AT {{accept.start_date}} TILL {{accept.end_date}}
  <br>
  {% endfor %}
 <br>
