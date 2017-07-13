@@ -12,10 +12,8 @@ class User(models.Model):
         self.save()
     def __str__(self):
         return self.name
-    def __unicode__(self):
-        return self.name
 class Appreq(models.Model):
-    ename = models.ForeignKey(User, on_delete=models.CASCADE)
+    ename = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     ID = models.CharField(max_length=100,primary_key=True, unique=True, default=uuid.uuid4())
     mail = models.EmailField()
     cname = models.CharField(max_length=50)
