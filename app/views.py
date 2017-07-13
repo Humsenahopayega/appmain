@@ -39,7 +39,7 @@ def redirect(request):
 def pagemain(request):
     return render_to_response('app/main.html', {}, RequestContext(request))
 
-@login_required(login_url='/home.html')
+@login_required(login_url='/')
 @csrf_exempt
 def home(request):
     if request.method == 'POST' and 'Accept' in request.POST:
@@ -68,6 +68,7 @@ def home(request):
                                                 'tentative':tentative}, RequestContext(request))
        return render_to_response('app/nomatch.html', {}, RequestContext(request))
 @csrf_exempt
+@login_required(login_url='/')
 def denied(request):
     if request.method == 'POST' and 'Tentative' in request.POST:
        t=request.POST.getlist('denied')
@@ -95,6 +96,7 @@ def denied(request):
                                                 'denied':denied}, RequestContext(request))
        return render_to_response('app/nomatch.html', {}, RequestContext(request))
 @csrf_exempt
+@login_required(login_url='/')
 def accept(request):
     if request.method == 'POST' and 'Deny' in request.POST:
        t=request.POST.getlist('accept')
