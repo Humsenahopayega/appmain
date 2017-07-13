@@ -70,4 +70,4 @@ def main(request):
         event = service.events().insert(calendarId='primary',sendNotifications=True,body=EVENT).execute()
         print ('Event created: %s' % (event.get('htmlLink')))
 if __name__ == '__main__' :
-        main(
+        main()
