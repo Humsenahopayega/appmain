@@ -1,6 +1,7 @@
 from __future__ import print_function
 import httplib2
 import os
+
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
@@ -8,8 +9,8 @@ from oauth2client.file import Storage
 from app.models import Appreq
 import datetime
 import json
+
 import dateutil.parser as parser
-import uuid
 
 try:
     import argparse
@@ -42,36 +43,34 @@ def get_credentials():
             credentials = tools.run(flow, store)
             print('Storing credentials to ' + credential_path)
     return credentials
-def main(request):
+def main(request) :
         credentials = get_credentials()
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
-        t = request.session['ID']
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('title')
+        t=request.session['ID']
+        evnt = Appreq.objects.filter(ID__in=t,value='1').values_list('title')
         title = evnt[0]
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('purpose')
+        evnt = Appreq.objects.filter(ID__in=t,value='1').values_list('purpose')
         description = evnt[0]
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('start_date')
+        evnt = Appreq.objects.filter(ID__in=t,value='1').values_list('start_date')
         start=evnt[0]
         text = '%s' %start
-        start = text
         start = (parser.parse(text))
         start = start.isoformat()
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('end_date')
+        evnt = Appreq.objects.filter(ID__in=t,value='1').values_list('end_date')
         end=evnt[0]
         text = '%s' %end
-        end = text
         end = (parser.parse(text))
         end = end.isoformat()
         EVENT= {
                 'summary' : '%s' %title,
                 'description': '%s' %description,
                 'start': {
-                          'dateTime': start,
+                          'dateTime': '%s' %start,
                           'timezone': 'Asia/Kolkata',
                           },
                 'end':   {
-                          'dateTime': end,
+                          'dateTime': '%s' %end,
                           'timezone': 'Asia/Kolkata',
                           }
          }
