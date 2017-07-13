@@ -11,7 +11,6 @@ from datetime import datetime
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-
 @csrf_exempt
 def appreq(request):
     if request.method == 'POST':
@@ -44,13 +43,16 @@ def pagemain(request):
 def home(request):
     if request.method == 'POST' and 'Accept' in request.POST:
        t=request.POST.getlist('tentative')
+       request.session['ID'] = t
        accept = Appreq.objects.filter(ID__in=t).update(value='1')
+       create.main(request)
        tentative = Appreq.objects.filter(value='0').order_by('published_date')
        return render_to_response('app/home.html', {'request': request,
                                                 'user': request.user,
                                                 'tentative':tentative}, RequestContext(request))
     elif request.method == 'POST' and 'Deny' in request.POST:
        t=request.POST.getlist('tentative')
+       request.session['ID'] = t
        denied = Appreq.objects.filter(ID__in=t).update(value='-1')
        tentative = Appreq.objects.filter(value='0').order_by('published_date')
        return render_to_response('app/home.html', {'request': request,
@@ -72,6 +74,7 @@ def home(request):
 def denied(request):
     if request.method == 'POST' and 'Tentative' in request.POST:
        t=request.POST.getlist('denied')
+       request.session['ID'] = t
        tentative = Appreq.objects.filter(ID__in=t).update(value='0')
        denied = Appreq.objects.filter(value='-1').order_by('published_date')
        return render_to_response('app/denied.html', {'request': request,
@@ -79,6 +82,7 @@ def denied(request):
                                                 'denied':denied}, RequestContext(request))
     elif request.method == 'POST' and 'Accept' in request.POST:
        t=request.POST.getlist('denied')
+       request.session['ID'] = t
        accept = Appreq.objects.filter(ID__in=t).update(value='1')
        denied = Appreq.objects.filter(value='-1').order_by('published_date')
        return render_to_response('app/denied.html', {'request': request,
@@ -100,6 +104,7 @@ def denied(request):
 def accept(request):
     if request.method == 'POST' and 'Deny' in request.POST:
        t=request.POST.getlist('accept')
+       request.session['ID'] = t
        denied = Appreq.objects.filter(ID__in=t).update(value='-1')
        accept = Appreq.objects.filter(value='1').order_by('published_date')
        return render_to_response('app/accept.html', {'request': request,
@@ -107,6 +112,7 @@ def accept(request):
                                                 'accept':accept}, RequestContext(request))
     elif request.method == 'POST' and 'Tentative' in request.POST:
        t=request.POST.getlist('accept')
+       request.session['ID'] = t
        tentative = Appreq.objects.filter(ID__in=t).update(value='0')
        accept = Appreq.objects.filter(value='1').order_by('published_date')
        return render_to_response('app/accept.html', {'request': request,

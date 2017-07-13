@@ -41,20 +41,22 @@ def get_credentials():
             credentials = tools.run(flow, store)
             print('Storing credentials to ' + credential_path)
     return credentials
-def main() :
+def main(request):
         credentials = get_credentials()
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
-        evnt = Appreq.objects.filter( title='Dinner').values_list('title')
+        t = request.session['ID']
+        evnt = Appreq.objects.filter(pk=t).values_list('title')
+        print(evnt)
         title = evnt[0]
-        evnt = Appreq.objects.filter( title='Dinner').values_list('purpose')
+        evnt = Appreq.objects.filter(ID=t).values_list('purpose')
         description = evnt[0]
-        evnt = Appreq.objects.filter( title='Dinner').values_list('start_date')
+        evnt = Appreq.objects.filter(ID=t).values_list('start_date')
         start=evnt[0]
         text = '%s' %start
         start = (parser.parse(text))
         start = start.isoformat()
-        evnt = Appreq.objects.filter( title='Dinner').values_list('end_date')
+        evnt = Appreq.objects.filter(ID=t).values_list('end_date')
         end=evnt[0]
         text = '%s' %end
         end = (parser.parse(text))
