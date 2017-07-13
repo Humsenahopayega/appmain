@@ -14,7 +14,7 @@ class User(models.Model):
         return self.name
 class Appreq(models.Model):
     ename = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
-    ID = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4())
+    ID = models.CharField(max_length=100,primary_key=True, unique=True, default=uuid.uuid4())
     mail = models.EmailField()
     cname = models.CharField(max_length=50)
     myname = models.CharField(max_length=50)
