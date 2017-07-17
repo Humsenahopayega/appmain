@@ -1,4 +1,5 @@
 import create
+import delete
 from django.shortcuts import render_to_response,redirect
 from django.utils import timezone
 from .models import Appreq,User
@@ -106,6 +107,7 @@ def accept(request):
        t=request.POST.getlist('accept')
        request.session['ID'] = t
        denied = Appreq.objects.filter(ID__in=t).update(value='-1')
+       delete.main(request)
        accept = Appreq.objects.filter(value='1').order_by('published_date')
        return render_to_response('app/accept.html', {'request': request,
                                                 'user': request.user,
@@ -114,6 +116,7 @@ def accept(request):
        t=request.POST.getlist('accept')
        request.session['ID'] = t
        tentative = Appreq.objects.filter(ID__in=t).update(value='0')
+       delete.main(request)
        accept = Appreq.objects.filter(value='1').order_by('published_date')
        return render_to_response('app/accept.html', {'request': request,
                                                 'user': request.user,

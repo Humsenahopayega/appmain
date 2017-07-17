@@ -43,6 +43,8 @@ def main(request):
         title = evnt[0]
         evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('purpose')
         description = evnt[0]
+        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('mail')
+        attendee = evnt[0]
         evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('start_date')
         start=evnt[0]
         text = '%s' %start
@@ -65,9 +67,14 @@ def main(request):
                 'end':   {
                           'dateTime': end,
                           'timezone': 'Asia/Kolkata',
-                          }
+                          },
+                'attendees': {
+                                  'email': '%s' %attendee,
+                                  }
          }
         event = service.events().insert(calendarId='primary',sendNotifications=True,body=EVENT).execute()
         print ('Event created: %s' % (event.get('htmlLink')))
+        event_id = event.get('id')
+        Appreq.objects.filter(ID__in=t,value='1').update(event_id=event_id)
 if __name__ == '__main__' :
         main()
