@@ -85,6 +85,7 @@ def denied(request):
        t=request.POST.getlist('denied')
        request.session['ID'] = t
        accept = Appreq.objects.filter(ID__in=t).update(value='1')
+       create.main(request)
        denied = Appreq.objects.filter(value='-1').order_by('published_date')
        return render_to_response('app/denied.html', {'request': request,
                                                 'user': request.user,
