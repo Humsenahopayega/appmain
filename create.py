@@ -15,14 +15,14 @@ except ImportError:
     flags = None
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 CLIENT_SECRET_FILE = 'client_secret.json'
-APPLICATION_NAME = 'Test1'
+APPLICATION_NAME = 'App'
 def get_credentials():
     home_dir = os.path.expanduser('~')
     credential_dir = os.path.join(home_dir, '.credentials')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
     credential_path = os.path.join(credential_dir,
-                                   'calendar-python-quickstart.json')
+                                   'client_secret.json')
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
