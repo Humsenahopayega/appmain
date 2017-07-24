@@ -1,6 +1,15 @@
 {% extends 'app/base.html' %}
 {% block content %}
+<head>
 <title>Login</title>
+<style>
+body {
+    background: white url("/static/images/background1.png") no-repeat center center fixed;
+    background-size: cover;
+    color:#FFFFFF;
+}
+</style>
+</head>
 <center>
 {% if user.is_authenticated %}
 <div id="namelogout">
@@ -8,9 +17,9 @@
   <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
 </div>
 <h1>Appointment Approval</h1>
-<a href="{% url 'denied' %}">Denied</a>&nbsp;&nbsp;
-<a href="{% url 'home' %}">Tentative</a>&nbsp;&nbsp;
-<a href="{% url 'accept' %}">Accepted</a>
+<a href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
+<a href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
+<a href="{% url 'accept' %}">Approved</a>
 <br><br>
 <table>
 <tr>

@@ -1,6 +1,15 @@
 {% extends 'app/base.html' %}
 {% block content %}
+<head>
 <title>Login</title>
+<style>
+body {
+    background: white url("/static/images/background1.png") no-repeat center center fixed;
+    background-size: cover;
+    color:#FFFFFF;
+}
+</style>
+</head>
 <center>
 {% if user.is_authenticated %}
 <div id="namelogout">

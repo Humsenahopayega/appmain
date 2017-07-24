@@ -46,6 +46,7 @@ def home(request):
        t=request.POST.getlist('tentative')
        request.session['ID'] = t
        accept = Appreq.objects.filter(ID__in=t).update(value='1')
+       create.get_credentials(request)
        create.main(request)
        tentative = Appreq.objects.filter(value='0').order_by('published_date')
        return render_to_response('app/home.html', {'request': request,
@@ -85,6 +86,7 @@ def denied(request):
        t=request.POST.getlist('denied')
        request.session['ID'] = t
        accept = Appreq.objects.filter(ID__in=t).update(value='1')
+       create.get_credentials(request)
        create.main(request)
        denied = Appreq.objects.filter(value='-1').order_by('published_date')
        return render_to_response('app/denied.html', {'request': request,
@@ -108,6 +110,7 @@ def accept(request):
        t=request.POST.getlist('accept')
        request.session['ID'] = t
        denied = Appreq.objects.filter(ID__in=t).update(value='-1')
+       create.get_credentials(request)
        delete.main(request)
        accept = Appreq.objects.filter(value='1').order_by('published_date')
        return render_to_response('app/accept.html', {'request': request,
@@ -117,6 +120,7 @@ def accept(request):
        t=request.POST.getlist('accept')
        request.session['ID'] = t
        tentative = Appreq.objects.filter(ID__in=t).update(value='0')
+       create.get_credentials(request)
        delete.main(request)
        accept = Appreq.objects.filter(value='1').order_by('published_date')
        return render_to_response('app/accept.html', {'request': request,

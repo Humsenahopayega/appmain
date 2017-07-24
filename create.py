@@ -16,13 +16,13 @@ except ImportError:
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'App'
-def get_credentials():
+def get_credentials(request):
     home_dir = os.path.expanduser('~')
+    t = request.session['ID']
     credential_dir = os.path.join(home_dir, '.credentials')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
-    credential_path = os.path.join(credential_dir,
-                                   'app.json')
+    credential_path = os.path.join(credential_dir, '%s' %t)
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
@@ -35,7 +35,7 @@ def get_credentials():
             print('Storing credentials to ' + credential_path)
     return credentials
 def main(request):
-        credentials = get_credentials()
+        credentials = get_credentials(request)
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
         t = request.session['ID']
