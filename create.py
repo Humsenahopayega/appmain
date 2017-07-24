@@ -13,9 +13,8 @@ try:
     flags = tools.argparser.parse_args([])
 except ImportError:
     flags = None
-parentdir = os.path.join(os.path.dirname(__file__),"client_secrets.json")
 SCOPES = 'https://www.googleapis.com/auth/calendar'
-CLIENT_SECRET_FILE = parentdir
+CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'App'
 def get_credentials():
     home_dir = os.path.expanduser('~')
