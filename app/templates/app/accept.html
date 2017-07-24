@@ -17,9 +17,9 @@ body {
   <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
 </div>
 <h1>Appointment Approval</h1>
-<a href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
-<a href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
-<a href="{% url 'accept' %}">Approved</a>
+<div id="red"><a href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;</div>
+<div id="yellow"><a href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;</div>
+<div id="green"><a href="{% url 'accept' %}">Approved</a></div>
 <br><br>
 <table>
 <tr>
