@@ -3,10 +3,15 @@
 <title>Login</title>
 <center>
 {% if user.is_authenticated %}
-<h1>LIST</h1>
-<h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
-<a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
-</br>
+<div id="namelogout">
+  <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
+  <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
+</div>
+<h1>Appointment Approval</h1>
+<a href="{% url 'denied' %}">Denied</a>&nbsp;&nbsp;
+<a href="{% url 'home' %}">Tentative</a>&nbsp;&nbsp;
+<a href="{% url 'accept' %}">Accepted</a>
+<br><br>
 <table>
 <tr>
 <td>Denied</td>
@@ -26,9 +31,6 @@
 <button style= width:200px; type="submit" class="savebutton" name="Accept">Accept</button>
 </form>
 <br><br>
-<a href="{% url 'denied' %}">Denied</a>
-<a href="{% url 'home' %}">Tentative</a>
-<a href="{% url 'accept' %}">Accepted</a>
 {% else %}
 <h1>Login through Google</h1>
 <h2>Please Login First!</h2>
