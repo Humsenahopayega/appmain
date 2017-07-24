@@ -13,8 +13,9 @@ try:
     flags = tools.argparser.parse_args([])
 except ImportError:
     flags = None
+parentdir = os.path.join(os.path.dirname(__file__),"client_secrets.json")
 SCOPES = 'https://www.googleapis.com/auth/calendar'
-CLIENT_SECRET_FILE = 'client_secret.json'
+CLIENT_SECRET_FILE = parentdir
 APPLICATION_NAME = 'App'
 def get_credentials():
     home_dir = os.path.expanduser('~')
@@ -22,7 +23,7 @@ def get_credentials():
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
     credential_path = os.path.join(credential_dir,
-                                   'client_secret.json')
+                                   'calendar-python-quickstart.json')
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
