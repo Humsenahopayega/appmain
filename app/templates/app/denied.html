@@ -10,18 +10,21 @@ body {
 }
 </style>
 </head>
-<center>
 {% if user.is_authenticated %}
 <div id="namelogout">
+  <center>
   <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
   <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
+  <center>
 </div>
-<h1>Appointment Approval</h1>
-<div id="red"><a href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;</div>
-<div id="yellow"><a href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;</div>
-<div id="green"><a href="{% url 'accept' %}">Approved</a></div>
+<h1 style= margin-left:5%;>Appointment Approval</h1>
+<div style= margin-left:5%;>
+<a href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
+<a href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
+<a href="{% url 'accept' %}">Approved</a>
+</div>
 <br><br>
-<table>
+<table style= margin-left:4%;>
 <tr>
 <td>Denied</td>
 </tr>
@@ -45,5 +48,4 @@ body {
 <h2>Please Login First!</h2>
 <a href="{% url 'main' %}">Return to main page</a>
 {% endif %}
-</center>
 {% endblock %}
