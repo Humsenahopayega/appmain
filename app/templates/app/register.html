@@ -6,16 +6,18 @@
 body {
     background: white url("/static/images/background1.png") no-repeat center center fixed;
     background-size: cover;
-    color:#FFFFFF;
   }
+.post{
+  margin-top:15%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding-bottom: 1%;
+  border:15px groove rgba(0,0,0,0.1);
+  background-color: white;
+}
 </style>
 </head>
 <div class="post">
-<style type="text/css">
-.post{
-margin-top:15%;
-}
-</style>
  <h1 style= margin-left:3%;>Enter the required details</h1>
     <form method='POST' class="post-form">{% csrf_token %}
         {{ regform.as_p }}

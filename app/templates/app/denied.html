@@ -6,7 +6,20 @@
 body {
     background: white url("/static/images/background1.png") no-repeat center center fixed;
     background-size: cover;
-    color:#FFFFFF;
+}
+.post {
+    margin-left: 1%;
+    margin-right: 25%;
+    border:15px groove rgba(0,0,0,0.1);
+    margin-top: 5%;
+    padding-bottom: 1%;
+    background-color: white;
+}
+h1{
+  color:#FFFFFF;
+}
+h2{
+  color:#FFFFFF;
 }
 </style>
 </head>
@@ -23,7 +36,7 @@ body {
 <a href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
 <a href="{% url 'accept' %}">Approved</a>
 </div>
-<br><br>
+<div class="post">
 <table style= margin-left:4%;>
 <tr>
 <td>Denied</td>
@@ -42,6 +55,7 @@ body {
 <button style= width:200px; type="submit" class="savebutton" name="Tentative">Tentative</button>
 <button style= width:200px; type="submit" class="savebutton" name="Accept">Accept</button>
 </form>
+</div>
 <br><br>
 {% else %}
 <h1>Login through Google</h1>
