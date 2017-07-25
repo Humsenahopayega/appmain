@@ -1,17 +1,30 @@
 {% extends 'app/base.html' %}
 {% block content %}
-<div class="post">
+<head>
 <title>Request Appointment</title>
-<style type="text/css">
-.post{
-margin-top:8%;
+<style>
+body {
+    background: white url("/static/images/background1.png") no-repeat center center fixed;
+    background-size: cover;
+  }
+.post {
+    margin-left: 25%;
+    margin-right: 25%;
+    border:15px groove rgba(0,0,0,0.1);
+    margin-top: 5%;
+    background-color: white;
 }
 </style>
 </head>
 <body>
-<h1>New Request</h1>
+  <center>
+  <h1 style= color:white;>New Request</h1>
+</center>
+  <div class="post">
+    <center>
     <form method='POST'>
-
       {{form.as_p}}
         <button type="submit" class="savebutton">Submit Request</button>    </form>
+      </center>
+      </div>
 {% endblock %}
