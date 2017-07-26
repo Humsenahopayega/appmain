@@ -21,6 +21,9 @@ h1{
 h2{
   color:#FFFFFF;
 }
+table, th, td {
+    border: 10px solid white;
+}
 </style>
 </head>
 {% if user.is_authenticated %}
@@ -39,18 +42,17 @@ h2{
 <div class="post">
 <table style= margin-left:4%;>
 <tr>
-<td>Accepted</td>
+<td>Accept</td>
+<td>Meeting With</td>
+<td>Start Time</td>
+<td>End Time</td>
 </tr>
 <tr>
-<td>
 <form method='POST'>
   {% for accept in accept %}
- <input type="checkbox" name="accept" value="{{ accept.ID }}">{{accept.title}} WITH  {{accept.myname}} AT {{accept.start_date}} TILL {{accept.end_date}}
- <br>
+ <td><input type="checkbox" name="accept" value="{{ accept.ID }}">{{accept.title}}</td><td>{{accept.myname}}</td><td>{{accept.start_date}}</td><td>{{accept.end_date}}</td>
+ </tr>
  {% endfor %}
-<br>
-</td>
-</tr>
 </table>
 <button style= width:200px; type="submit" class="savebutton" name="Deny">Deny</button>
 <button style= width:200px; type="submit" class="savebutton" name="Tentative">Tentative</button>

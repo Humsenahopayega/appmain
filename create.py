@@ -39,25 +39,26 @@ def main(request):
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
         t = request.session['ID']
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('title')
-        title = evnt[0]
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('purpose')
-        description = evnt[0]
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('mail')
-        attendee = evnt[0]
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('start_date')
-        start=evnt[0]
-        text = '%s' %start
-        start = text
-        start = (parser.parse(text))
-        start = start.isoformat()
-        evnt = Appreq.objects.filter(ID__in=t, value='1').values_list('end_date')
-        end=evnt[0]
-        text = '%s' %end
-        end = text
-        end = (parser.parse(text))
-        end = end.isoformat()
-        EVENT= {
+        for x in t:
+         evnt = Appreq.objects.filter(ID__in=x, value='1').values_list('title')
+         title = evnt[0]
+         evnt = Appreq.objects.filter(ID__in=x, value='1').values_list('purpose')
+         description = evnt[0]
+         evnt = Appreq.objects.filter(ID__in=x, value='1').values_list('mail')
+         attendee = evnt[0]
+         evnt = Appreq.objects.filter(ID__in=x, value='1').values_list('start_date')
+         start=evnt[0]
+         text = '%s' %start
+         start = text
+         start = (parser.parse(text))
+         start = start.isoformat()
+         evnt = Appreq.objects.filter(ID__in=x, value='1').values_list('end_date')
+         end=evnt[0]
+         text = '%s' %end
+         end = text
+         end = (parser.parse(text))
+         end = end.isoformat()
+         EVENT= {
                 'summary' : '%s' %title,
                 'description': '%s' %description,
                 'start': {
@@ -71,10 +72,10 @@ def main(request):
                 'attendees': {
                                   'email': '%s' %attendee,
                                   }
-         }
-        event = service.events().insert(calendarId='primary',sendNotifications=True,body=EVENT).execute()
-        print ('Event created: %s' % (event.get('htmlLink')))
-        event_id = event.get('id')
-        Appreq.objects.filter(ID__in=t,value='1').update(event_id=event_id)
+           }
+         event = service.events().insert(calendarId='primary',sendNotifications=True,body=EVENT).execute()
+         print ('Event created: %s' % (event.get('htmlLink')))
+         event_id = event.get('id')
+         Appreq.objects.filter(ID__in=x,value='1').update(event_id=event_id)
 if __name__ == '__main__' :
         main()

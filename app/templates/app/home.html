@@ -21,6 +21,9 @@ h1{
 h2{
   color:#FFFFFF;
 }
+table, th, td {
+    border: 10px solid white;
+}
 </style>
 </head>
 {% if user.is_authenticated %}
@@ -40,17 +43,16 @@ h2{
 <table style= margin-left:4%;>
 <tr>
 <td>Tentative</td>
+<td>Meeting With</td>
+<td>Start Time</td>
+<td>End Time</td>
 </tr>
 <tr>
-<td>
 <form method='POST'>
-  {% for tentative in tentative %}
- <input type="checkbox" name="tentative" value="{{ tentative.ID }}">{{tentative.title}} WITH  {{tentative.myname}} AT {{tentative.start_date}} TILL {{tentative.end_date}}
- <br>
- {% endfor %}
-<br>
-</td>
+{% for tentative in tentative %}
+<td><input type="checkbox" name="tentative" value="{{ tentative.ID }}">{{tentative.title}}</td><td>{{tentative.myname}}</td><td>{{tentative.start_date}}</td> <td>{{tentative.end_date}}</td>
 </tr>
+{% endfor %}
 </table>
 <button style= width:200px; type="submit" class="savebutton" name="Deny">Deny</button>
 <button style= width:200px; type="submit" class="savebutton" name="Accept">Accept</button>

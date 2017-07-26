@@ -38,8 +38,9 @@ def main(request):
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('calendar' , 'v3' , http=http)
         t = request.session['ID']
-        evnt = Appreq.objects.filter(ID__in=t).values_list('event_id')
-        event_id = evnt[0]
-        service.events().delete(calendarId='primary', eventId='%s' %event_id).execute()
+        for x in t:
+         evnt = Appreq.objects.filter(ID__in=x).values_list('event_id')
+         event_id = evnt[0]
+         service.events().delete(calendarId='primary', eventId='%s' %event_id).execute()
 if __name__ == '__main__' :
         main()

@@ -21,6 +21,9 @@ h1{
 h2{
   color:#FFFFFF;
 }
+table, th, td {
+    border: 10px solid white;
+}
 </style>
 </head>
 {% if user.is_authenticated %}
@@ -39,18 +42,17 @@ h2{
 <div class="post">
 <table style= margin-left:4%;>
 <tr>
-<td>Denied</td>
+  <td>Denied&nbsp;</td>
+  <td>Meeting With&nbsp;&nbsp;</td>
+  <td>Start Time&nbsp;&nbsp;</td>
+  <td>End Time&nbsp;</td>
 </tr>
 <tr>
-<td>
 <form method='POST'>
   {% for denied in denied %}
- <input type="checkbox" name="denied" value="{{ denied.ID }}">{{denied.title}} WITH  {{denied.myname}} AT {{denied.start_date}} TILL {{denied.end_date}}
- <br>
+ <td><input type="checkbox" name="denied" value="{{ denied.ID }}">{{denied.title}}<td><td>{{denied.myname}}</td><td>{{denied.start_date}}</td>{{denied.end_date}}</td>
+ </tr>
  {% endfor %}
-<br>
-</td>
-</tr>
 </table>
 <button style= width:200px; type="submit" class="savebutton" name="Tentative">Tentative</button>
 <button style= width:200px; type="submit" class="savebutton" name="Accept">Accept</button>
