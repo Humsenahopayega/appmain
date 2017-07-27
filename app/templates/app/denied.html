@@ -8,13 +8,14 @@ body {
     background-size: cover;
 }
 .post {
-    margin-left: 1%;
-    margin-right: 25%;
-    border:15px groove rgba(0,0,0,0.1);
-    margin-top: 5%;
-    padding-bottom: 1%;
-    background-color: white;
-}
+      margin-left: 21%;
+      margin-right: 24%;
+      border:15px groove rgba(0,0,0,0.1);
+      margin-top: 5%;
+      padding-bottom: 1%;
+      padding-top: 1%;
+      background-color: white;
+  }
 h1{
   color:#FFFFFF;
 }
@@ -22,15 +23,14 @@ h2{
   color:#FFFFFF;
 }
 table, th, td {
-    border: 10px solid white;
+    border: 2px solid grey;
 }
 a:link, a:visited{
-background-color: black;  color: white;
-padding: 8px 25px;       text-align: center;
+background-color: white;  color: black; text-align: center;   padding: 12px 23px;
 text-decoration: none;    display: inline-block;
 }
 a:hover, a:active{
-background-color: grey;
+background-color: white;
 }
 .approved:hover, .approved:active{
 background-color: green;
@@ -41,6 +41,15 @@ background-color: red;
 .requested:hover, .requested:active{
 background-color: yellow;
 }
+.logout:link, .logout:visited{
+  background-color: white;  color: black; text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;    display: inline-block;
+}
+.logout:hover, .logout:active{
+background-color: grey;
+}
+th, td { padding-left: 50px; }
 </style>
 </head>
 {% if user.is_authenticated %}
@@ -48,16 +57,17 @@ background-color: yellow;
   <center>
   <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
   <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
-  <center>
+</center>
 </div>
-<h1 style= margin-left:5%;>Appointment Approval</h1>
-<div style= margin-left:5%;>
+<center>
+<h1 style= margin-left:4%;>Appointment Approval</h1>
+<div style= margin-left:4%;>
   <a class="rejected" href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
   <a class="requested" href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
   <a class="approved" href="{% url 'accept' %}">Approved</a>
 </div>
 <div class="post">
-<table style= margin-left:4%;>
+<table style= margin-left:1%;>
 <tr>
   <td>Denied&nbsp;</td>
   <td>Meeting With&nbsp;&nbsp;</td>
@@ -67,7 +77,7 @@ background-color: yellow;
 <tr>
 <form method='POST'>
   {% for denied in denied %}
- <td><input type="checkbox" name="denied" value="{{ denied.ID }}"><a href="{% url 'view' pk=denied.ID %}">{{denied.title}}</a></td><td>{{denied.myname}}</td><td>{{denied.start_date}}</td><td>{{denied.end_date}}</td>
+ <td text-align: left;><input type="checkbox" name="denied" value="{{ denied.ID }}"><a href="{% url 'view' pk=denied.ID %}">{{denied.title}}</a></td><td  style= text-align:left;>{{denied.myname}}</td><td>{{denied.start_date}}</td><td>{{denied.end_date}}</td>
  </tr>
  {% endfor %}
 </table>
@@ -76,6 +86,7 @@ background-color: yellow;
 </form>
 </div>
 <br><br>
+</center>
 {% else %}
 <h1>Login through Google</h1>
 <h2>Please Login First!</h2>
