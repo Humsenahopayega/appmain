@@ -37,10 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'oauth2_provider',
-    'corsheaders',
     'app',
-    'schedule',
-    'djangobower',
     'bootstrap3',
     'social_django',
 ]

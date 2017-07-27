@@ -6,8 +6,6 @@ from .models import Appreq,User
 from .forms import PostForm,RegForm
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-import subprocess
-from calendar import monthrange
 from datetime import datetime
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required

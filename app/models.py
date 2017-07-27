@@ -1,9 +1,5 @@
 from django.db import models
 from django.utils import timezone
-import uuid
-from django.utils.html import conditional_escape as esc
-from django.utils.safestring import mark_safe
-from itertools import groupby
 
 class User(models.Model):
     name = models.CharField(max_length=50)
@@ -14,8 +10,8 @@ class User(models.Model):
         return self.name
 class Appreq(models.Model):
     ename = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
-    ID = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    event_id= models.CharField(max_length=50,null=True)
+    ID = models.AutoField(primary_key=True)
+    event_id= models.CharField(max_length=50,unique=True, null=True)
     mail = models.EmailField()
     cname = models.CharField(max_length=50)
     myname = models.CharField(max_length=50)

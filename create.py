@@ -6,7 +6,6 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 from app.models import Appreq
-import datetime
 import dateutil.parser as parser
 try:
     import argparse

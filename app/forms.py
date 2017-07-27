@@ -1,7 +1,6 @@
 from django import forms
 from .models import Appreq
 from .models import User
-from django.contrib.admin import widgets
 
 class PostForm(forms.ModelForm):
     class Meta:
