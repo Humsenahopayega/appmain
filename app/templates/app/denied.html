@@ -50,7 +50,7 @@ table, th, td {
 <tr>
 <form method='POST'>
   {% for denied in denied %}
- <td><input type="checkbox" name="denied" value="{{ denied.ID }}">{{denied.title}}<td><td>{{denied.myname}}</td><td>{{denied.start_date}}</td>{{denied.end_date}}</td>
+ <td><input type="checkbox" name="denied" value="{{ denied.ID }}"><a href="{% url 'view' pk=denied.ID %}">{{denied.title}}</a></td><td>{{denied.myname}}</td><td>{{denied.start_date}}</td><td>{{denied.end_date}}</td>
  </tr>
  {% endfor %}
 </table>

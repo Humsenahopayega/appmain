@@ -50,7 +50,7 @@ table, th, td {
 <tr>
 <form method='POST'>
   {% for accept in accept %}
- <td><input type="checkbox" name="accept" value="{{ accept.ID }}">{{accept.title}}</td><td>{{accept.myname}}</td><td>{{accept.start_date}}</td><td>{{accept.end_date}}</td>
+ <td><input type="checkbox" name="accept" value="{{ accept.ID }}"><a href="{% url 'view' pk=accept.ID %}">{{accept.title}}</a></td><td>{{accept.myname}}</td><td>{{accept.start_date}}</td><td>{{accept.end_date}}</td>
  </tr>
  {% endfor %}
 </table>
