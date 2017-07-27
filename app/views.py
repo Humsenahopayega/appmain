@@ -145,4 +145,5 @@ def auth_logout(request):
 def view(request, pk):
     view = get_object_or_404(Appreq, ID__in=pk)
     return render_to_response('app/view.html', {'request': request,
+                                                'user': request.user,
                                                 'view': view}, RequestContext(request))
