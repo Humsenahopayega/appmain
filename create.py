@@ -57,6 +57,8 @@ def main(request):
          end = text
          end = (parser.parse(text))
          end = end.isoformat()
+         evnt = Appreq.objects.filter(ID__in=x, value='1').values_list('mail')
+         attendee = evnt[0]
          EVENT= {
                 'summary' : '%s' %title,
                 'description': '%s' %description,
@@ -70,7 +72,14 @@ def main(request):
                           },
                 'attendees': {
                                   'email': '%s' %attendee,
-                                  }
+                                  },
+                'reminders': {
+                               'useDefault': False,
+                               'overrides': [
+                                              {'method': 'email', 'minutes': 24 * 60},
+                                              {'method': 'popup', 'minutes': 10},
+                                              ],
+                                              },
            }
          event = service.events().insert(calendarId='primary',sendNotifications=True,body=EVENT).execute()
          print ('Event created: %s' % (event.get('htmlLink')))
