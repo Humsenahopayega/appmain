@@ -1,0 +1,22 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<head>
+<style>
+body {
+    background: white url("/static/images/background1.png") no-repeat center center fixed;
+    background-size: cover;
+  }
+.post{ color:#FFFFFF;
+}
+</style>
+</head>
+<div class="post">
+    <h1>{{ view.title }}</h1>
+    <h3>Meeting With: {{ view.myname }}</h3>
+    <h4>Company's Name: {{ view.cname }}</h4>
+    <p>Purpose: {{ view.purpose }}</p>
+    <p>Contact No: {{ view.phone }}</p>
+    <p>From: {{ view.start_date }}</p>
+    <p>Till: {{ view.end_date }}</p>
+</div>
+{% endblock %}

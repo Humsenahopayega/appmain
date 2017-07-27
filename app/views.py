@@ -139,3 +139,10 @@ def auth_logout(request):
     logout(request)
     request.session.flush()
     return render_to_response('app/main.html', {}, RequestContext(request))
+
+@login_required(login_url='/')
+@csrf_exempt
+def view(request, pk):
+    view = get_object_or_404(Appreq, ID__in=pk)
+    return render_to_response('app/view.html', {'request': request,
+                                                'view': view}, RequestContext(request))

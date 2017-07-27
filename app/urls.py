@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^denied$', views.denied, name='denied'),
     url(r'^accept$', views.accept, name='accept'),
     url(r'^logout/$', views.auth_logout,name='logout'),
+    url(r'^view/(?P<pk>\d+)/$', views.view, name='view'),
 ]
