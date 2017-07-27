@@ -14,6 +14,9 @@ body {
     padding-bottom: 1%;
     background-color: white;
 }
+p{
+  font-size: 22px;
+}
 </style>
 </head>
 <body>
@@ -22,9 +25,19 @@ body {
 </center>
   <div class="post">
     <center>
+    <h2 style= color:black;>Meeting With<h2>
     <form method='POST'>
-      {{form.as_p}}
-        <button type="submit" class="savebutton">Submit</button>    </form>
+      <p>Employee's Name: {{form.ename}}</p>
+      <p>Purpose: {{form.title}}</p>
+      <p>Description</p>
+      <p>{{form.purpose}}</p>
+      <p>Start Time: {{form.start_date}}</p>
+      <p>End Time: {{form.end_date}}</p>
+      <h2 style= color:black;>Your Information<h2>
+      <p>Name: {{form.myname}}</p>
+      <p>Mail: {{form.mail}}</p>
+      <p>Phone: {{form.phone}}</p>
+        <button style= width:200px; type="submit" class="savebutton">Submit</button>    </form>
       </center>
       </div>
 {% endblock %}
