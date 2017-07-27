@@ -24,6 +24,23 @@ h2{
 table, th, td {
     border: 10px solid white;
 }
+a:link, a:visited{
+background-color: black;  color: white;
+padding: 8px 25px;       text-align: center;
+text-decoration: none;    display: inline-block;
+}
+a:hover, a:active{
+background-color: grey;
+}
+.approved:hover, .approved:active{
+background-color: green;
+}
+.rejected:hover, .rejected:active{
+background-color: red;
+}
+.requested:hover, .requested:active{
+background-color: yellow;
+}
 </style>
 </head>
 {% if user.is_authenticated %}
@@ -35,9 +52,9 @@ table, th, td {
 </div>
 <h1 style= margin-left:5%;>Appointment Approval</h1>
 <div style= margin-left:5%;>
-<a href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
-<a href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
-<a href="{% url 'accept' %}">Approved</a>
+<a class="rejected" href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
+<a class="requested" href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
+<a class="approved" href="{% url 'accept' %}">Approved</a>
 </div>
 <div class="post">
 <table style= margin-left:4%;>
