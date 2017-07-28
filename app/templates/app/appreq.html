@@ -17,6 +17,9 @@ body {
 p{
   font-size: 22px;
 }
+label{
+  font-size: 18px;
+}
 </style>
 </head>
 <body>
@@ -24,20 +27,9 @@ p{
   <h1 style= color:white;>New Request</h1>
 </center>
   <div class="post">
-    <center>
-    <h2 style= color:black;>Meeting With<h2>
-    <form method='POST'>
-      <p>Employee's Name: {{form.ename}}</p>
-      <p>Purpose: {{form.title}}</p>
-      <p>Description</p>
-      <p>{{form.purpose}}</p>
-      <p>Start Time: {{form.start_date}}</p>
-      <p>End Time: {{form.end_date}}</p>
-      <h2 style= color:black;>Your Information<h2>
-      <p>Name: {{form.myname}}</p>
-      <p>Mail: {{form.mail}}</p>
-      <p>Phone: {{form.phone}}</p>
+    <h2 style= color:black;>Meeting With</h2>
+    <form action="" method='POST'>
+      {{form.as_p}}
         <button style= width:200px; type="submit" class="savebutton">Submit</button>    </form>
-      </center>
       </div>
 {% endblock %}

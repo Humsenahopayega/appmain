@@ -14,12 +14,14 @@ from django.contrib.auth import logout
 def appreq(request):
     if request.method == 'POST':
        form = PostForm(request.POST)
+       print(form)
        if form.is_valid():
             appreq = form.save(commit=False)
             appreq.published_date = timezone.now()
             appreq.save()
             return redirect('redirect')
-    form = PostForm()
+    now = timezone.now()
+    form = PostForm(initial={'start_date': now, 'end_date': now})
     return render_to_response( 'app/appreq.html', {'form':form}, RequestContext(request))
 @csrf_exempt
 def users(request):
