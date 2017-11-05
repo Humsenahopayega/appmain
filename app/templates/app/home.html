@@ -8,12 +8,12 @@ body {
     background-size: cover;
   }
 .post {
-      margin-left: 21%;
+      margin-left: 23%;
       margin-right: 24%;
       border:15px groove rgba(0,0,0,0.1);
       border-radius: 12px;
       margin-top: 5%;
-      padding-bottom: 1%;
+      padding-bottom: 3%;
       padding-top: 1%;
       background-color: white;
   }
@@ -61,14 +61,14 @@ th, td { padding-left: 50px; }
 </center>
 </div>
 <center>
-<h1 style= margin-left:4%;>Appointment Approval</h1>
-<div style= margin-left:4%;>
+<h1>Appointment Approval</h1>
+<div>
 <a class="rejected" href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
 <a class="requested" href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
 <a class="approved" href="{% url 'accept' %}">Approved</a>
 </div>
 <div class="post">
-<table style= margin-left:6%;width:90%>
+<table style= margin-left:6%;width:90%;>
 <tr>
 <td>Tentative&nbsp;&nbsp;</td>
 <td>Meeting With&nbsp;&nbsp;</td>
@@ -78,7 +78,8 @@ th, td { padding-left: 50px; }
 <form method='POST'>
 {% for tentative in tentative %}
 <tr>
-<td style= text-align:left;><input type="checkbox" name="tentative" value="{{ tentative.ID }}"><a href="{% url 'view' pk=tentative.ID %}">{{tentative.title}}</a></td><td style= text-align:left;>{{tentative.myname}}</td><td>{{tentative.start_date}}</td><td>{{tentative.end_date}}</td>
+  <div class="checkbox">
+<td style= text-align:left;><input type="checkbox" name="tentative" value="{{ tentative.ID }}"><a href="{% url 'view' pk=tentative.ID %}">{{tentative.title}}</a></td></div><td style= text-align:left;>{{tentative.myname}}</td><td>{{tentative.start_date}}</td><td>{{tentative.end_date}}</td>
 </tr>
 {% endfor %}
 </table>

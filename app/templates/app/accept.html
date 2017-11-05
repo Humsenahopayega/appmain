@@ -8,12 +8,12 @@ body {
     background-size: cover;
 }
 .post {
-      margin-left: 21%;
+      margin-left: 23%;
       margin-right: 24%;
       border:15px groove rgba(0,0,0,0.1);
       border-radius: 12px;
       margin-top: 5%;
-      padding-bottom: 1%;
+      padding-bottom: 3%;
       padding-top: 1%;
       background-color: white;
   }
@@ -61,8 +61,8 @@ th, td { padding-left: 50px; }
 </center>
 </div>
 <center>
-<h1 style= margin-left:4%;>Appointment Approval</h1>
-<div style= margin-left:4%;>
+<h1>Appointment Approval</h1>
+<div>
   <a class="rejected" href="{% url 'denied' %}">Rejected</a>&nbsp;&nbsp;
   <a class="requested" href="{% url 'home' %}">Requested</a>&nbsp;&nbsp;
   <a class="approved" href="{% url 'accept' %}">Approved</a>
@@ -78,7 +78,8 @@ th, td { padding-left: 50px; }
 <tr>
 <form method='POST'>
   {% for accept in accept %}
- <td style= text-align:left;><input type="checkbox" name="accept" value="{{ accept.ID }}"><a href="{% url 'view' pk=accept.ID %}">{{accept.title}}</a></td><td style= text-align:left;>{{accept.myname}}</td><td>{{accept.start_date}}</td><td>{{accept.end_date}}</td>
+  <div class="checkbox">
+ <td style= text-align:left;><input type="checkbox" name="accept" value="{{ accept.ID }}"><a href="{% url 'view' pk=accept.ID %}">{{accept.title}}</a></td></div><td style= text-align:left;>{{accept.myname}}</td><td>{{accept.start_date}}</td><td>{{accept.end_date}}</td>
  </tr>
  {% endfor %}
 </table>
