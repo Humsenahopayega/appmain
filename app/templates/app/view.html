@@ -9,13 +9,28 @@ body {
 .post{
   color:#FFFFFF;
 }
+a:link, a:visited{
+background-color: white;  color: black; text-align: center;   padding: 12px 23px; border-radius: 12px;
+text-decoration: none;    display: inline-block;
+}
+a:hover, a:active{
+background-color: white;
+}
+.logout:link, .logout:visited{
+  background-color: white;  color: black; text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;    display: inline-block;
+}
+.logout:hover, .logout:active{
+background-color: grey;
+}
 </style>
 </head>
 {% if user.is_authenticated %}
 <div id="namelogout">
   <center>
   <h2 style= color:white;>Hello {{ user.get_full_name|default:user.username }}!</h2>
-  <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
+  <a class="logout" href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
 </center>
 </div>
 <div class="post">

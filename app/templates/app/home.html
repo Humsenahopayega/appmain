@@ -33,6 +33,9 @@ text-decoration: none;    display: inline-block;
 a:hover, a:active{
 background-color: white;
 }
+.checkbox:hover, .checkbox:active{
+box-shadow: 0 1px black;
+}
 .approved:hover, .approved:active{
 background-color: green;
 }
@@ -78,8 +81,7 @@ th, td { padding-left: 50px; }
 <form method='POST'>
 {% for tentative in tentative %}
 <tr>
-  <div class="checkbox">
-<td style= text-align:left;><input type="checkbox" name="tentative" value="{{ tentative.ID }}"><a href="{% url 'view' pk=tentative.ID %}">{{tentative.title}}</a></td></div><td style= text-align:left;>{{tentative.myname}}</td><td>{{tentative.start_date}}</td><td>{{tentative.end_date}}</td>
+<td style= text-align:left;><input type="checkbox" name="tentative" value="{{ tentative.ID }}"><a href="{% url 'view' pk=tentative.ID %}"><div class="checkbox">{{tentative.title}}</div></a></td><td style= text-align:left;>{{tentative.myname}}</td><td>{{tentative.start_date}}</td><td>{{tentative.end_date}}</td>
 </tr>
 {% endfor %}
 </table>

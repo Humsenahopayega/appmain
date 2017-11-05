@@ -33,6 +33,9 @@ text-decoration: none;    display: inline-block;
 a:hover, a:active{
 background-color: white;
 }
+.checkbox:hover, .checkbox:active{
+box-shadow: 0 1px black;
+}
 .approved:hover, .approved:active{
 background-color: green;
 }
@@ -78,8 +81,7 @@ th, td { padding-left: 50px; }
 <tr>
 <form method='POST'>
   {% for denied in denied %}
-  <div class="checkbox">
- <td text-align: left;><input type="checkbox" name="denied" value="{{ denied.ID }}"><a href="{% url 'view' pk=denied.ID %}">{{denied.title}}</a></td></div><td  style= text-align:left;>{{denied.myname}}</td><td>{{denied.start_date}}</td><td>{{denied.end_date}}</td>
+ <td text-align: left;><input type="checkbox" name="denied" value="{{ denied.ID }}"><a href="{% url 'view' pk=denied.ID %}"><div class="checkbox">{{denied.title}}</div></a></td><td  style= text-align:left;>{{denied.myname}}</td><td>{{denied.start_date}}</td><td>{{denied.end_date}}</td>
  </tr>
  {% endfor %}
 </table>
