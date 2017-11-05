@@ -56,7 +56,7 @@ th, td { padding-left: 50px; }
 <div id="namelogout">
   <center>
   <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
-  <a class="logout" href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
+  <a href="{% url 'logout' %}?next={% url 'pagemain' %}">Logout</a>
 </center>
 </div>
 <center>
